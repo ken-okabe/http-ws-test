@@ -95,7 +95,6 @@ var HTTPserver =
 	httpServer(require('path')
 		.join(__dirname, 'www'));
 var webSocketServer;
-var Socket = [];
 HTTPserver
 	.on('listening', function()
 	{
