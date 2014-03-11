@@ -95,22 +95,29 @@ HTTPserver
 			new WebSocket.Server(
 			{
 				server: HTTPserver
-			})
+			});
+		webSocketServer
 			.on('connection',
 				function(ws)
 				{
 					console.log('client connected');
 					setTimeout(function()
 					{
-						console.log('trying to close HTTPserver');
-						HTTPserver.close(); // never happens
-					}, 3000);
+						console.log('trying to close webSocketserver');
+						webSocketServer.close();
+						setTimeout(function()
+						{
+							console.log('trying to close HTTPserver');
+							HTTPserver.close();
+						}, 1000);
+
+					}, 1000);
 
 				});
 	})
 	.on('close', function()
 	{
-		console.log('server closed');
+		console.log('server closed'); // never happens
 	})
 	.on('error', function()
 	{
